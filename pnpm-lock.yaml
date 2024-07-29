@@ -4,17 +4,20 @@ dependencies:
   '@testing-library/user-event': 12.6.2
   bootstrap: 5.3.3
   chalk: 4.1.0
+  date-fns: 3.6.0
   history: 5.0.0
   js-cookie: 2.2.1
   msw: 0.28.1
   react: 17.0.1
   react-bootstrap: 2.10.4_react-dom@17.0.1+react@17.0.1
   react-dom: 17.0.1_react@17.0.1
+  react-icon: 1.0.0_react@17.0.1
   react-icons: 4.2.0_react@17.0.1
   react-loader-spinner: 4.0.0_react-dom@17.0.1+react@17.0.1
   react-router: 6.21.1_react@17.0.1
   react-router-dom: 5.2.0_react@17.0.1
   reactjs-popup: 2.0.6_react-dom@17.0.1+react@17.0.1
+  uuid: 10.0.0
 devDependencies:
   eslint-config-airbnb: 18.2.1
   eslint-config-prettier: 8.1.0
@@ -5970,6 +5973,10 @@ packages:
       node: '>=10'
     resolution:
       integrity: sha512-X5eWTSXO/BJmpdIKCRuKUgSCgAN0OwliVK3yPKbwIWU1Tdw5BRajxlzMidvh+gwko9AfQ9zIj52pzF91Q3YAvQ==
+  /date-fns/3.6.0:
+    dev: false
+    resolution:
+      integrity: sha512-fRHTG8g/Gif+kSh50gaGEdToemgfj74aRX3swtiouboip5JDLAyDE9F11nHMIcvOaXeOC6D7SpNhi7uFyB7Uww==
   /debug/2.6.9:
     dependencies:
       ms: 2.0.0
@@ -12194,6 +12201,15 @@ packages:
     dev: true
     resolution:
       integrity: sha512-/6UZ2qgEyH2aqzYZgQPxEnz33NJ2gNsnHA2o5+o4wW9bLM/JYQitNP9xPhsXwC08hMMovfGe/8retsdDsczPRg==
+  /react-icon/1.0.0_react@17.0.1:
+    dependencies:
+      react: 17.0.1
+    dev: false
+    peerDependencies:
+      babel-runtime: ^5.3.3
+      react: '>=0.12.0'
+    resolution:
+      integrity: sha512-VzSlpBHnLanVw79mOxyq98hWDi6DlxK9qPiZ1bAK6bLurMBCaxO/jjyYUrRx9+JGLc/NbnwOmyE/W5Qglbb2QA==
   /react-icons/4.2.0_react@17.0.1:
     dependencies:
       react: 17.0.1
@@ -14474,6 +14490,11 @@ packages:
       node: '>= 0.4.0'
     resolution:
       integrity: sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==
+  /uuid/10.0.0:
+    dev: false
+    hasBin: true
+    resolution:
+      integrity: sha512-8XkAphELsDnEGrDxUOHB3RGvXz6TeuYSGEZBOjtTtPm2lwhGBjLgOzLHB63IUWfBpNucQjND6d3AOudO+H3RWQ==
   /uuid/3.4.0:
     deprecated: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
     dev: true
@@ -15188,6 +15209,7 @@ specifiers:
   '@testing-library/user-event': 12.6.2
   bootstrap: 5.3.3
   chalk: 4.1.0
+  date-fns: 3.6.0
   eslint-config-airbnb: 18.2.1
   eslint-config-prettier: 8.1.0
   eslint-plugin-prettier: 3.3.1
@@ -15201,9 +15223,11 @@ specifiers:
   react: 17.0.1
   react-bootstrap: 2.10.4
   react-dom: 17.0.1
+  react-icon: 1.0.0
   react-icons: 4.2.0
   react-loader-spinner: 4.0.0
   react-router: 6.21.1
   react-router-dom: 5.2.0
   react-scripts: 4.0.3
   reactjs-popup: 2.0.6
+  uuid: 10.0.0
