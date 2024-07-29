@@ -1,6 +1,4 @@
-import React, {Component} from 'react'
-import {v4 as uuidv4} from 'uuid'
-import {Link} from 'react-router-dom'
+import {Component} from 'react'
 
 import {FiSave} from 'react-icons/fi'
 import {IoIosClose} from 'react-icons/io'
@@ -15,7 +13,27 @@ class AddTransaction extends Component {
     transactionType: 'credit',
     showAmountError: false,
     showDescriptionError: false,
-    transactionsList: [],
+    length: 0,
+  }
+
+  componentDidMount() {
+    this.getTransactions()
+  }
+
+  getTransactions = async () => {
+    const url =
+      'https://gopichand-transactions-app-backend-1.onrender.com/transactions/'
+
+    const options = {
+      method: 'GET',
+    }
+
+    const response = await fetch(url, options)
+    const data = await response.json()
+    console.log(data)
+    const {length} = data
+
+    this.setState({length})
   }
 
   onClickClearDescription = () => {
@@ -34,9 +52,14 @@ class AddTransaction extends Component {
     this.setState({transactionType: event.target.value})
   }
 
+  submitSuccess = () => {
+    const {history} = this.props
+    history.replace('/')
+  }
+
   onSubmitTransactionDetails = async event => {
     event.preventDefault()
-    const {transactionType, amount, description} = this.state
+    const {transactionType, amount, description, length} = this.state
 
     const date = new Date()
     const day = String(date.getDate()).padStart(2, '0')
@@ -52,14 +75,14 @@ class AddTransaction extends Component {
       this.setState({showDescriptionError: true})
     } else {
       const newTransactionDetails = {
-        id: uuidv4(), // Generate a unique ID for each transaction
+        id: length + 1, // Generate a unique ID for each transaction
         type: transactionType,
         amount: parseFloat(amount), // Ensure amount is a number
         description,
         date: formattedDate,
       }
       const url =
-        'https://gopichand-transactions-app-backend-2.onrender.com/transactions/'
+        'https://gopichand-transactions-app-backend-1.onrender.com/transactions/'
       const options = {
         method: 'POST',
         headers: {
@@ -72,16 +95,14 @@ class AddTransaction extends Component {
         const response = await fetch(url, options)
         if (response.ok) {
           const data = await response.json()
-          this.setState(prevState => ({
-            transactionsList: [
-              ...prevState.transactionsList,
-              newTransactionDetails,
-            ],
+          console.log(data)
+          this.setState({
             amount: '',
             description: '',
             showAmountError: false,
             showDescriptionError: false,
-          }))
+          })
+          this.submitSuccess()
         } else {
           const errorData = await response.json()
           console.error('Failed to add transaction', errorData)
@@ -154,7 +175,7 @@ class AddTransaction extends Component {
                       rows="5"
                       cols="15"
                       key="DESCRIPTION"
-                      className="input-container "
+                      className="input-container"
                       value={description}
                       onChange={this.onChangeDescription}
                     />
@@ -176,9 +197,7 @@ class AddTransaction extends Component {
 
             <div className="btns-container">
               <button type="submit" className="save-btn">
-                <Link to="/office-transactions" className="link">
-                  <FiSave aria-label="save" /> SAVE
-                </Link>
+                <FiSave aria-label="save" /> save
               </button>
 
               <button type="button" className="cancel-btn">

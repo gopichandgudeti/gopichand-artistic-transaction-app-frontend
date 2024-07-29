@@ -4,28 +4,9 @@ import Loader from 'react-loader-spinner'
 
 import './index.css'
 
-const myTransactions = [
-  {
-    id: 1,
-    date: '27/07/2024',
-    description: 'for company expences',
-    credit: 5000,
-    debit: 0,
-    runningBal: '',
-  },
-  {
-    id: 2,
-    date: '27/07/2024',
-    description: 'for company expences',
-    credit: 4000,
-    debit: 0,
-    runningBal: 9000,
-  },
-]
-
 class TransactionsList extends Component {
   state = {
-    transactionsList: [],
+    transactions: [],
     isLoading: true,
   }
 
@@ -35,10 +16,12 @@ class TransactionsList extends Component {
 
   getTransactions = async () => {
     const url =
-      'https://gopichand-transactions-app-backend-2.onrender.com/transactions/'
+      'https://gopichand-transactions-app-backend-1.onrender.com/transactions/'
+
     const options = {
       method: 'GET',
     }
+
     const response = await fetch(url, options)
     const data = await response.json()
     console.log(data)
@@ -50,7 +33,7 @@ class TransactionsList extends Component {
       type: each.type,
     }))
 
-    this.setState({transactionsList: formattedData, isLoading: false})
+    this.setState({transactions: formattedData, isLoading: false})
   }
 
   renderLoadingView = () => (
@@ -60,8 +43,7 @@ class TransactionsList extends Component {
   )
 
   render() {
-    const {transactionsList, isLoading} = this.state
-
+    const {transactions, isLoading} = this.state
     return (
       <div className="app-bg-container">
         {isLoading ? (
@@ -77,7 +59,7 @@ class TransactionsList extends Component {
                   <th>.</th>
                   <th>.</th>
                   <th>
-                    <Link to="/">
+                    <Link to="/add-transaction">
                       <button type="button" aria-label="Add Transaction">
                         Add Transaction
                       </button>
@@ -94,7 +76,7 @@ class TransactionsList extends Component {
                 </tr>
               </thead>
               <tbody>
-                {transactionsList.map(each => (
+                {transactions.map(each => (
                   <tr>
                     <td>{each.date}</td>
                     <td>{each.description}</td>
